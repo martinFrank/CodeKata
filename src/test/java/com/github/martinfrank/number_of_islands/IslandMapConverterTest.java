@@ -8,15 +8,16 @@ import static org.junit.Assert.assertNull;
 
 public class IslandMapConverterTest {
 
-    public final char[][] mapGrid = {
-            {'1', '1', '1', '1', '0'},
-            {'1', '1', '0', '1', '0'},
-            {'1', '1', '0', '0', '0'},
-            {'0', '0', '0', '0', '0'}
-    };
-
     @Test
     public void testGoodCase(){
+
+        final char[][] mapGrid = {
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'}
+        };
+
         IslandMapConverter islandMapConverter = new IslandMapConverter();
         IslandMap map = islandMapConverter.convert(mapGrid);
 

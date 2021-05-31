@@ -16,13 +16,18 @@ public class MapFields {
 
     //visible for testing
     MapField getField(final int xpos, final int ypos) {
-        return mapFields.stream().filter(mf -> mf.xpos == xpos && mf.ypos == ypos).findAny().orElse(null);
+        return mapFields.stream().
+                filter(mf -> mf.xpos == xpos && mf.ypos == ypos).
+                findAny().orElse(null);
     }
 
     public List<MapField> getLandFieldsWithout(Collection<Island> islands) {
         final List<MapField> islandFields = new ArrayList<>();
         islands.forEach(i -> islandFields.addAll(i.getFields()));
-        return mapFields.stream().filter(mf -> (mf.type == MapFieldType.LAND && !islandFields.contains(mf))).collect(Collectors.toList());
+        return mapFields.stream().
+                filter(f -> f.type == MapFieldType.LAND).
+                filter(f -> !islandFields.contains(f)).
+                collect(Collectors.toList());
     }
 
 }

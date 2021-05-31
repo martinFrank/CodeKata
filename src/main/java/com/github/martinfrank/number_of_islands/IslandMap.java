@@ -23,13 +23,11 @@ public class IslandMap {
     }
 
     private void calculateIslands(){
-        List<MapField> openFields = mapFields.getLandFieldsWithout(islands);
-        while(!openFields.isEmpty()){
-            MapField any = openFields.remove(0);
-            Island island = new Island(any);
-            island.extend(openFields);
+        List<MapField> landFields = mapFields.getLandFieldsWithout(islands);
+        while(!landFields.isEmpty()){
+            Island island = Island.createFirstFrom(landFields);
             islands.add(island);
-            openFields = mapFields.getLandFieldsWithout(islands);
+            landFields = mapFields.getLandFieldsWithout(islands);
         }
     }
 

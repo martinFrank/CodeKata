@@ -27,7 +27,7 @@ public class MapField {
         return Objects.hash(xpos, ypos, type);
     }
 
-    public boolean isAdjectedTo(MapField candidate) {
+    public boolean isConnectedTo(MapField candidate) {
         if (candidate.xpos == xpos && candidate.ypos == ypos - 1) { //NORTH
             return true;
         }
@@ -37,6 +37,7 @@ public class MapField {
         if (candidate.xpos == xpos - 1 && candidate.ypos == ypos) { //WEST
             return true;
         }
+        //not simplified for better reading of directions
         if (candidate.xpos == xpos + 1 && candidate.ypos == ypos) { //EAST
             return true;
         }
