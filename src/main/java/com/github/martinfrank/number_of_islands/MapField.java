@@ -43,4 +43,13 @@ public class MapField {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "MapField{" +
+                "xpos=" + xpos +
+                ", ypos=" + ypos +
+                ", type=" + type +
+                '}';
+    }
 }

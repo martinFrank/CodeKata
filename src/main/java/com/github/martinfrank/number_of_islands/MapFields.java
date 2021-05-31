@@ -1,6 +1,9 @@
 package com.github.martinfrank.number_of_islands;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MapFields {
@@ -21,7 +24,7 @@ public class MapFields {
                 findAny().orElse(null);
     }
 
-    public List<MapField> getLandFieldsWithout(Collection<Island> islands) {
+    public List<MapField> getLandFieldsWithout(List<Island> islands) {
         final List<MapField> islandFields = new ArrayList<>();
         islands.forEach(i -> islandFields.addAll(i.getFields()));
         return mapFields.stream().
@@ -29,5 +32,6 @@ public class MapFields {
                 filter(f -> !islandFields.contains(f)).
                 collect(Collectors.toList());
     }
+
 
 }

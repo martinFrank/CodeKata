@@ -1,7 +1,6 @@
 package com.github.martinfrank.number_of_islands;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Island {
@@ -20,23 +19,26 @@ public class Island {
 
     private void extendFirstFrom(List<MapField> candidates) {
         MapField startField = candidates.remove(0);//that's the first
-        final List<MapField> openFields = new ArrayList<>();
+        final Set<MapField> openFields = new HashSet<>();
         openFields.add(startField);
         do {
+            Set<MapField> connectedFields = new HashSet<>();
             for (MapField openField : openFields) {
-                List<MapField> connectedFields = getConnectedFields(openField, candidates);
+                Set<MapField> connectedOnes = getConnectedFields(openField, candidates);
+                connectedFields.addAll(connectedOnes);
                 candidates.removeAll(connectedFields);
-                mapFields.addAll(openFields);
-                openFields.clear();
-                openFields.addAll(connectedFields);
+            }
+            openFields.addAll(connectedFields);
+            if(connectedFields.isEmpty()){
                 break;
             }
-        }while(!openFields.isEmpty());
+        }while(true);
+        mapFields.addAll(openFields);
     }
 
-    private List<MapField> getConnectedFields(MapField openField, List<MapField> candidates) {
+    private Set<MapField> getConnectedFields(MapField center, List<MapField> candidates) {
         return candidates.stream().
-                filter(openField::isConnectedTo).
-                collect(Collectors.toList());
+                filter(center::isConnectedTo).
+                collect(Collectors.toSet());
     }
 }
