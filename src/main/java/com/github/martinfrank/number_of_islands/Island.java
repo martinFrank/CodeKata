@@ -19,21 +19,25 @@ public class Island {
 
     private void extendFirstFrom(List<MapField> candidates) {
         MapField startField = candidates.remove(0);//that's the first
-        final Set<MapField> openFields = new HashSet<>();
-        openFields.add(startField);
+        final Set<MapField> firstFields = new HashSet<>();
+        final Set<MapField> secondFields = new HashSet<>();
+        firstFields.add(startField);
         do {
             Set<MapField> connectedFields = new HashSet<>();
-            for (MapField openField : openFields) {
+            for (MapField openField : firstFields) {
                 Set<MapField> connectedOnes = getConnectedFields(openField, candidates);
                 connectedFields.addAll(connectedOnes);
                 candidates.removeAll(connectedFields);
             }
-            openFields.addAll(connectedFields);
+            secondFields.addAll(firstFields);
+            firstFields.clear();
+            firstFields.addAll(connectedFields);
             if(connectedFields.isEmpty()){
+                secondFields.addAll(connectedFields);
                 break;
             }
         }while(true);
-        mapFields.addAll(openFields);
+        mapFields.addAll(secondFields);
     }
 
     private Set<MapField> getConnectedFields(MapField center, List<MapField> candidates) {
