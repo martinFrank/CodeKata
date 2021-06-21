@@ -12,12 +12,4 @@ public class Building {
         this.height = height;
     }
 
-    @Override
-    public String toString() {
-        return "Building{" +
-                "x=" + x +
-                ", width=" + width +
-                ", height=" + height +
-                '}';
-    }
 }

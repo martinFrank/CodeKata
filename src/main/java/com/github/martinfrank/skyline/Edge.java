@@ -1,23 +1,27 @@
 package com.github.martinfrank.skyline;
 
+import java.util.Objects;
+
 public class Edge {
 
     public final int x;
     public final int height;
-    public final boolean isRising;
 
-    public Edge(int x, int height, boolean isRising){
+    public Edge(int x, int height){
         this.x = x;
         this.height = height;
-        this.isRising = isRising;
     }
 
     @Override
-    public String toString() {
-        return "Edge{" +
-                "x=" + x +
-                ", h=" + height +
-                ", isRising=" + isRising +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Edge edge = (Edge) o;
+        return x == edge.x && height == edge.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, height);
     }
 }
