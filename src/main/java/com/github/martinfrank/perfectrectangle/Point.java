@@ -13,11 +13,6 @@ public class Point {
     }
 
     @Override
-    public String toString() {
-        return "P{" + x + "/" + y + '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

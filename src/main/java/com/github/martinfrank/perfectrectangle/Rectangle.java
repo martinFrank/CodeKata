@@ -1,7 +1,5 @@
 package com.github.martinfrank.perfectrectangle;
 
-import java.util.Arrays;
-
 public class Rectangle {
 
     public final Point[] points;
@@ -15,19 +13,8 @@ public class Rectangle {
         points[3] = new Point(x1,y1);
         area = (x1-x0)*(y1-y0);
     }
-
-    public Point[] getPoints() {
-        return points;
+    public Rectangle(int[] input) {
+        this(input[0],input[1],input[2],input[3]);
     }
 
-    public int getArea(){
-        return area;
-    }
-
-    @Override
-    public String toString() {
-        return "Rectangle{" +
-                "points=" + Arrays.toString(points) +
-                '}';
-    }
 }
