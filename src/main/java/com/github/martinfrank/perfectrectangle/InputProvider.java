@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class InputProvider {
 
-    private final ArrayDeque<Rectangle> rectangles = new ArrayDeque<>();
+    public final ArrayDeque<Rectangle> rectangles = new ArrayDeque<>();
     private int boundsX0 = Integer.MAX_VALUE;
     private int boundsY0 = Integer.MAX_VALUE;
     private int boundsX1 = Integer.MIN_VALUE;
@@ -19,10 +19,6 @@ public class InputProvider {
     public void processInput(int[] input){
         rectangles.add(new Rectangle(input));
         updateBounds(input);
-    }
-
-    public ArrayDeque<Rectangle> getRectangles() {
-        return rectangles;
     }
 
     public Rectangle getBounds() {

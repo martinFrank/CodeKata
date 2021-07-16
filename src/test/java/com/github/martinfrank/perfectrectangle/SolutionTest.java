@@ -19,4 +19,6 @@ public class SolutionTest {
         Solution solution = new Solution();
         Assert.assertFalse(solution.isRectangleCover(INVAILD_DATA) );
     }
+
+    //more test after more data is provided
 }

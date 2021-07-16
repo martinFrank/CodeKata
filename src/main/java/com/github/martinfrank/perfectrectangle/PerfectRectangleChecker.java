@@ -2,20 +2,23 @@ package com.github.martinfrank.perfectrectangle;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.function.Predicate;
 
 public class PerfectRectangleChecker {
 
     private final HashSet<Point> disjunctiveCorners = new HashSet<>();
+    private final Deque<Rectangle> rectangles;
     private final Rectangle bounds;
     private int area;
 
-    public PerfectRectangleChecker(Rectangle bounds) {
+    public PerfectRectangleChecker(Rectangle bounds, Deque<Rectangle> rectangles) {
         this.bounds = bounds;
+        this.rectangles = rectangles;
     }
 
-    public boolean check(ArrayDeque<Rectangle> rectangles) {
+    public boolean check() {
         for (Rectangle r : rectangles) {
             processRectangles(r);
         }
