@@ -1,5 +1,6 @@
 package com.github.martinfrank.calculator;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -8,9 +9,9 @@ import java.util.Scanner;
  */
 public class SimpleInfixConsoleReader {
 
-    private final Calculator calculator;
+    private final Calculator<BigDecimal> calculator;
 
-    public SimpleInfixConsoleReader(Calculator calculator){
+    public SimpleInfixConsoleReader(Calculator<BigDecimal> calculator){
         this.calculator = calculator;
     }
 
@@ -21,7 +22,7 @@ public class SimpleInfixConsoleReader {
             String line = scanner.nextLine();
             parser.parseLine(line);
             if(parser.hasOperation()) {
-                calculator.setOperation(parser.getOperation());
+                BigDecimal result = calculator.calculate(parser.getOperation());
             }else{
                 System.out.println("input '"+line+"' is not a valid infix operation!");
             }

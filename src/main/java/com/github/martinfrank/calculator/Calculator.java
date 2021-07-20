@@ -2,10 +2,9 @@ package com.github.martinfrank.calculator;
 
 import java.math.BigDecimal;
 
-public interface Calculator {
+public interface Calculator<T> {
 
-    void setOperation(Operation operation);
+    T calculate(Operation<T> operation);
 
-    BigDecimal getResult();
 
 }

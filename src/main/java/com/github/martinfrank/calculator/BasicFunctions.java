@@ -5,23 +5,19 @@ import java.math.MathContext;
 
 public class BasicFunctions {
 
-    private static final ArithmeticFunction ADD_FUNCTION = new ArithmeticFunction("+", BigDecimal::add);
-    private static final ArithmeticFunction SUBTRACT_FUNCTION = new ArithmeticFunction("-", BigDecimal::subtract);
-    private static final ArithmeticFunction MULTIPLY_FUNCTION = new ArithmeticFunction("*",BigDecimal::multiply );
-    private static final ArithmeticFunction DIVIDE_FUNCTION =
-            new ArithmeticFunction("/", (first, second) -> first.divide(second, MathContext.DECIMAL64));
+    private BasicFunctions(){}
 
-    public static ArithmeticFunction getBasicFunction(String identifier) {
-        switch (identifier) {
+    public static ArithmeticFunction getBasicFunction(String operationSymbol, MathContext context) {
+        switch (operationSymbol) {
             case "+":
-                return ADD_FUNCTION;
+                return new ArithmeticFunction("+", BigDecimal::add);
             case "-":
-                return SUBTRACT_FUNCTION;
+                return new ArithmeticFunction("-", BigDecimal::subtract);
             case "*":
-                return MULTIPLY_FUNCTION;
+                return new ArithmeticFunction("*",BigDecimal::multiply );
             case "/":
-                return DIVIDE_FUNCTION;
+                return new ArithmeticFunction("/", (first, second) -> first.divide(second, context));
         }
-        throw new IllegalArgumentException("unknown function identifier:'" + identifier + "'");
+        throw new IllegalArgumentException("unknown function identifier:'" + operationSymbol + "'");
     }
 }
