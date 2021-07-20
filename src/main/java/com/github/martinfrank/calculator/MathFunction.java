@@ -1,10 +1,21 @@
 package com.github.martinfrank.calculator;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.function.Function;
 
-@FunctionalInterface
-public interface MathFunction<T> {
+public abstract class MathFunction<T> implements Function<Operands<T>, MathResult<T>> {
 
-    T apply(Operands<T> o);
+    public final String symbol;
+
+    public MathFunction(String symbol) {
+        this.symbol = symbol;
+    }
+
+    @Override
+    public String toString() {
+        return symbol;
+    }
+
+    @Override
+    public abstract MathResult<T> apply(Operands<T> o);
+
 }

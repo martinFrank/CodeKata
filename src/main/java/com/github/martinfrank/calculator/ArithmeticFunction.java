@@ -1,23 +1,17 @@
 package com.github.martinfrank.calculator;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.function.BiFunction;
 
-//public class ArithmeticFunction implements BiFunction<BigDecimal, BigDecimal, BigDecimal> {
-public class ArithmeticFunction implements MathFunction<BigDecimal> {
+public class ArithmeticFunction extends MathFunction<BigDecimal> {
 
-    public final String symbol;
-    private BiFunction<BigDecimal, BigDecimal, BigDecimal> function;
+    private final BiFunction<BigDecimal, BigDecimal, BigDecimal> function;
 
     public ArithmeticFunction(String symbol, BiFunction<BigDecimal, BigDecimal, BigDecimal> function){
-        this.symbol = symbol;
+        super(symbol);
         this.function = function;
     }
-//
-//    @Override
-//    public BigDecimal apply(BigDecimal firstOperand, BigDecimal secondOperand) {
-//        return function.apply(firstOperand, secondOperand);
-//    }
 
     @Override
     public String toString() {
@@ -25,7 +19,25 @@ public class ArithmeticFunction implements MathFunction<BigDecimal> {
     }
 
     @Override
-    public BigDecimal apply(Operands<BigDecimal> o) {
-        return function.apply(o.getFirst().getType(), o.getSecond().getType());
+    public MathResult<BigDecimal> apply(Operands<BigDecimal> o) {
+        return new MathResult<>(function.apply(o.getFirst(), o.getSecond()));
+    }
+
+    public static ArithmeticFunction getBasicFunction(String operationSymbol, MathContext context) {
+        return new ArithmeticFunction(operationSymbol, getFunction(operationSymbol, context));
+    }
+
+    private static BiFunction<BigDecimal, BigDecimal, BigDecimal> getFunction(String operationSymbol, MathContext context) {
+        switch (operationSymbol) {
+            case "+":
+                return BigDecimal::add;
+            case "-":
+                return BigDecimal::subtract;
+            case "*":
+                return BigDecimal::multiply;
+            case "/":
+                return (first, second) -> first.divide(second, context);
+        }
+        throw new IllegalArgumentException("unknown function identifier:'" + operationSymbol + "'");
     }
 }
